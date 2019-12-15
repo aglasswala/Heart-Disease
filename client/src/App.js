@@ -85,7 +85,6 @@ const App = () => {
 		})
 	}
 
-	console.log(result)
 	return (
 		<div>
 			<div className="container">
@@ -147,6 +146,9 @@ const App = () => {
 						    <div className="text-center">
 							   <button name="submission" onClick={submit} id="submission" className="btn btn-block send-button tx-tfm mt-3">Submit</button>
 						    </div>
+					        <div className="text-center">
+					    	   <button type="reset" className="btn btn-block g-button tx-tfm mt-3">Clear</button>
+					        </div>
 					    </form>
 					</div>
 				 </div>
