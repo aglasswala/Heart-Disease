@@ -1,6 +1,5 @@
 module.exports = {
 	heart: (req, res) => {
-		console.log(req.body)
 		const { sex, cp, trestbps, thalach, oldpeak, ca, thal } = req.body
 
 		if (thal < 2.5) {

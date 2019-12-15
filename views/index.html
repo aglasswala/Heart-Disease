@@ -4,7 +4,7 @@
     <head>
         <title>Heart Disease</title>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type ="text/javascript">
+<!--         <script type ="text/javascript">
                 $(document).ready(function(){
                     $("#submission").click(function(){
                         $.getJSON({
@@ -32,10 +32,16 @@
                         });
                     });
                 });
+        </script> -->
+        <script type="text/javascript">
+            function submitForm() {
+                var formData = JSON.stringify($("#myform").serializeArray());
+                console.log(formData)
+            }
         </script>
     </head>
     <body>
-        <form name= "myform">
+        <form action="/api/heart" method="POST" name="myform">
             <p>Sex</p>
             <input type="number" step="any" name="sex" id = "sex"/>
             <p>Chest Pain (1 = typical angina 2 = atypical angina 3 = non-anginal pain 4 = asymptomatic)</p>
@@ -52,7 +58,7 @@
             <input type="number"step="any" name="thal" id="thal"/>
             <br>
             <br>
-            <button type ="click" name="submission" id="submission">Submit</button>
+            <button type="submit" onclick="submitForm()" name="submission" id="submission">Submit</button>
         </form>
             <div name = "pasteHere" id="pasteHere"></div>
     </body>
