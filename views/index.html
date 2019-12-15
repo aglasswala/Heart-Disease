@@ -3,8 +3,57 @@
 <html>
     <head>
         <title>Heart Disease</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type ="text/javascript">
+                $(document).ready(function(){
+                    $("#submission").click(function(){
+                        $.getJSON({
+                            type: "POST",
+                            url: '/api/heart',
+                            data: {
+                                'sex': $('#sex').val(), 
+                                'cp': $('#cp').val(), 
+                                'trestbps': $('#trestbps').val(), 
+                                'thalach': $('#thalach').val(), 
+                                'oldpeak': $('#oldpeak').val(), 
+                                'ca': $('#ca').val(), 
+                                'thal': $('#thal').val()
+                                },
+                            success: function(data){
+                                alert(JSON.stringify(data))
+                                $("#pasteHere").html(data);
+                                // var temp = JSON.parse(data);
+                                // console.log(temp);
+                            },
+                            error: function(xhr, desc, err) {
+                                console.log(xhr);
+                                console.log("Details: " + desc + "\nError:" + err);
+                            }
+                        });
+                    });
+                });
+        </script>
     </head>
     <body>
-        
+        <form name= "myform">
+            <p>Sex</p>
+            <input type="number" step="any" name="sex" id = "sex"/>
+            <p>Chest Pain (1 = typical angina 2 = atypical angina 3 = non-anginal pain 4 = asymptomatic)</p>
+            <input type="number" step="any" name="cp" id="cp"/>
+            <p>Blood Pressure (Trestbps)</p>
+            <input type="number" step="any" name="trestbps" id="trestbps"/>
+            <p>Max Heart Rate Achieved (Thalach)</p>
+            <input type="number" step="any" name="thalach" id="thlach">
+            <p>ST Depression induced by Exercise relative to rest (oldpeak)</p>
+            <input type="number" step="any" name="oldpeak" id="oldpeak"/>
+            <p>Number of major vessels (0-3) colored by flourosopy (ca)</p>
+            <input type="number" step="any" name="ca" id="ca">
+            <p>Thalassemia (blood disorder that cause body to make less hemoglobin, low levels of hemoglobin can cause anemia) (thal)</p>
+            <input type="number"step="any" name="thal" id="thal"/>
+            <br>
+            <br>
+            <button type ="click" name="submission" id="submission">Submit</button>
+        </form>
+            <div name = "pasteHere" id="pasteHere"></div>
     </body>
 </html>
