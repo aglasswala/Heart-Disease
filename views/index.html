@@ -1,59 +1,129 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+
+    <title>Heart Disease</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type ="text/javascript">
+            $(document).ready(function(){
+                $("#submission").click(function(){
+                    var formData = JSON.stringify($("myform").serializeArray());
+                    console.log(formData);
+                    $.getJSON({
+                        type: "POST",
+                        url: '/api/heart',
+                        data: {
+                            'sex': $('#sex').val(), 
+                            'cp': $('#cp').val(), 
+                            'trestbps': $('#trestbps').val(), 
+                            'thalach': $('#thalach').val(), 
+                            'oldpeak': $('#oldpeak').val(), 
+                            'ca': $('#ca').val(), 
+                            'thal': $('#thal').val()
+                            },
+                        success: function(data){
+                            alert(JSON.stringify(data))
+                            $("#pasteHere").html(data);
+                            // var temp = JSON.parse(data);
+                            // console.log(temp);
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+                });
+            });
+    </script>
+  </head>
+  <body>
+    <body>
+    	<div class="container">
+    	  <div class="col-md-6 mx-auto text-center">
+    		 <div class="header-title">
+    			<h1 class="wv-heading--title">
+    			   Find out what's the risk of Heart Disease
+    			</h1>
+    			<h2 class="wv-heading--subtitle">
+    			   According to the study from the American Heart Association, 121.5 million Americans, or about 48.5 percent, dealt with heart or blood vessel disease as of 2016. 
+    			</h2>
+    		 </div>
+    	  </div>
+    	  <div class="row">
+    		 <div class="col-md-4 mx-auto">
+    			<div class="myform form ">
+    			   <form name="myform">
+    				    <div class="form-group">
+    					    <label name="sex" id="sex">Sex</label>
+                            <select class="form-control" name="sex" id="sex">
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+    				    </div>
+    				    <div class="form-group">
+    					    <label name="cp" id="cp">Chest Pain</label>
+                            <select class="form-control" name="cp" id="cp">
+                                <option value="1">Typical Angina</option>
+                                <option value="2">Atypical Angina</option>
+                                <option value="3">Non-anginal pain</option>
+                                <option value="4">Asymptomatic</option>
+                            </select>
+    				    </div>
+    				    <div class="form-group">
+    					    <p>Blood Pressure (Trestbps) Range: 94 - 200</p>
+                            <input type="number" class="form-control my-input" step="any" name="trestbps" id="trestbps"/>
+    				    </div>
+                        <div class="form-group">
+                            <p>Max Heart Rate Achieved (Thalach) Range: 71 - 202 bpm</p>
+                            <input type="number" class="form-control my-input" step="any" name="thalach" id="thlach">
+                        </div>
+                        <div class="form-group">
+                            <p>ST Depression induced by Exercise relative to rest (oldpeak) Range: 0 - 6.2 </p>
+                            <input type="number" class="form-control my-input" step="any" name="oldpeak" id="oldpeak"/>
+                        </div>                         
+                        <div class="form-group">
+                            <label name="ca" id="ca">Number of major vessels (0-3) colored by flourosopy (ca)</label>
+                            <select class="form-control" name="ca" id="ca">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <p>Thalassemia (blood disorder that cause body to make less hemoglobin, low levels of hemoglobin can cause anemia) (thal) Range: 0 - 3</p>
+                            <input type="number"step="any" name="thal" class="form-control my-input" id="thal"/>
+                        </div>                        
+    				    <div class="text-center">
+    					   <button name="submission" id="submission" class="btn btn-block send-button tx-tfm mt-3">Submit</button>
+    				    </div>
+    			    </form>
+    			</div>
+    		 </div>
+    	  </div>
+    	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+
 
 <html>
     <head>
         <title>Heart Disease</title>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type ="text/javascript">
-                $(document).ready(function(){
-                    $("#submission").click(function(){
-                        $.getJSON({
-                            type: "POST",
-                            url: '/api/heart',
-                            data: {
-                                'sex': $('#sex').val(), 
-                                'cp': $('#cp').val(), 
-                                'trestbps': $('#trestbps').val(), 
-                                'thalach': $('#thalach').val(), 
-                                'oldpeak': $('#oldpeak').val(), 
-                                'ca': $('#ca').val(), 
-                                'thal': $('#thal').val()
-                                },
-                            success: function(data){
-                                alert(JSON.stringify(data))
-                                $("#pasteHere").html(data);
-                                // var temp = JSON.parse(data);
-                                // console.log(temp);
-                            },
-                            error: function(xhr, desc, err) {
-                                console.log(xhr);
-                                console.log("Details: " + desc + "\nError:" + err);
-                            }
-                        });
-                    });
-                });
-        </script>
+        
     </head>
-    <body>
-        <form name= "myform">
-            <p>Sex</p>
-            <input type="number" step="any" name="sex" id = "sex"/>
-            <p>Chest Pain (1 = typical angina 2 = atypical angina 3 = non-anginal pain 4 = asymptomatic)</p>
-            <input type="number" step="any" name="cp" id="cp"/>
-            <p>Blood Pressure (Trestbps)</p>
-            <input type="number" step="any" name="trestbps" id="trestbps"/>
-            <p>Max Heart Rate Achieved (Thalach)</p>
-            <input type="number" step="any" name="thalach" id="thlach">
-            <p>ST Depression induced by Exercise relative to rest (oldpeak)</p>
-            <input type="number" step="any" name="oldpeak" id="oldpeak"/>
-            <p>Number of major vessels (0-3) colored by flourosopy (ca)</p>
-            <input type="number" step="any" name="ca" id="ca">
-            <p>Thalassemia (blood disorder that cause body to make less hemoglobin, low levels of hemoglobin can cause anemia) (thal)</p>
-            <input type="number"step="any" name="thal" id="thal"/>
-            <br>
-            <br>
-            <button type ="click" name="submission" id="submission">Submit</button>
-        </form>
-            <div name = "pasteHere" id="pasteHere"></div>
-    </body>
+    
 </html>
